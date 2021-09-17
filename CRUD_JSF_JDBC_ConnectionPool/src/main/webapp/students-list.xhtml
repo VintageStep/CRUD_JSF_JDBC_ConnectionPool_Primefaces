@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+<f:metadata>
+	<f:event listener="#{studentController.loadStudents()}" type="postAddToView"></f:event>
+</f:metadata>
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>Student Tracker App</title>
+	
+	<h:outputStylesheet library="css" name="style.css"/>
+</h:head> 
+<h:body> 
+	<div id="wrapper">
+		<div id="header">
+			<h2> Coding University</h2>
+		</div>
+	</div>
+	<div id="container">
+		<div id="content">
+			<h:messages globalOnly="true"/>
+			
+			<p:button value="Add Student" outcome="add-student-form"/><!-- outcome is a redirect  -->
+			<h:form>
+				<span class="ui-input-icon-right">
+					<p:outputLabel >Search student:</p:outputLabel> 
+					<i class="pi pi-search" /> <p:inputText value="#{studentController.searchName}" id="theSearchName" placeholder="Search"/> 					
+				</span>	
+				
+				<p:commandButton value="Search" action="list-students?faces-redirect=true" styleClass="add-student-button" ajax="false"/>
+			</h:form>
+			<h:form>
+			<p:dataTable value="#{studentController.students}" var="element"
+					styleClass="demo-table"
+					headerClass="demo-table-header"
+					rowClasses="demo-table-odd-row, demo-table-even-row"
+					allowUnsorting="true" sortMode="multiple">
+					
+					<p:column headerText="First Name" sortBy="#{element.fNname}" sortOrder="asc">
+						<h:outputText value="#{element.fNname}" />
+					</p:column>
+					<p:column headerText="Last Name" sortBy="#{element.lName}" sortOrder="asc">
+						<h:outputText value="#{element.lName}" />
+					</p:column>
+					<p:column headerText="email" sortBy="#{element.email}" sortOrder="asc">
+						<h:outputText value="#{element.email}" />
+					</p:column>
+					<p:column headerText="Action"  sortBy="#{element.id}" sortOrder="asc">
+						<h:commandLink action="#{studentController.loadStudent(element.id)}" value="Update" />
+						|
+						<h:commandLink action="#{studentController.deleteStudent(element.id)}" value="Delete"
+							onclick="if (!confirm('Are you sure you want to delete this student?')) return false" />
+							<!-- the String stored on the onclick value is JS -->
+					</p:column>
+			</p:dataTable>
+			</h:form>
+		</div>
+	</div>
+</h:body> 
+</html>

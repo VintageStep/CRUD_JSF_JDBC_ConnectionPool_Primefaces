@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>Update Student</title>
+	
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="add-student-style.css"/>
+</h:head> 
+<h:body> 
+	<div id="wrapper">
+		<div id="header">
+			<h2> Coding University</h2>
+		</div>
+	</div>
+	<div id="container">
+		<h3>Update Student</h3>
+		<h:messages globalOnly="true"/>
+		
+		<h:form id="form" style="margin-top: 10px;">
+			<h:panelGrid columns="3">
+				<!-- Thanks to the value field we can load the data that is stored in the ExternalContext 
+					[check StudentController.loadStudent()] for more information -->
+				<p:outputLabel >First name:</p:outputLabel> <p:inputText value="#{student.fNname}" id="firstName"/><p:message for="firstName"/>
+				
+				<p:outputLabel >Last name:</p:outputLabel> <p:inputText value="#{student.lName}" id="lastName"/><p:message for="lastName"/>
+				
+				<p:outputLabel >Email:</p:outputLabel> <p:inputText value="#{student.email}" id="email"
+									required="true"
+									requiredMessage="Your email is mandatory."/> <p:message for="email"/>
+				
+				<!-- The hidden field helps you retrieve and submit again the id of the student object, otherwise is set to 0 making 
+					the update impossible -->					
+				<h:inputHidden value="#{student.id}" />					
+				
+				<h:outputLabel />	
+				
+				<p:commandButton action="#{studentController.updateStudent(student)}" value="Save" styleClass="save" ajax="false"/>	
+				
+			</h:panelGrid>
+		</h:form>
+		
+		<div style="clear: both;"></div>
+		
+		<p><h:outputLink value="students-list.xhtml">Back to List</h:outputLink></p>
+		
+	</div>
+
+</h:body> 
+</html>
