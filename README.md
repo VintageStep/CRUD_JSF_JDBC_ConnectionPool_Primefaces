@@ -13,7 +13,7 @@ The last thing is that this project was made in Eclipse IDE and manages its libr
 -INSTRUCTIONS: Import the schema stored in 'student_tracker.sql' in your DBMS of choice but be wary this schema was made in MySQL Workbench
 so you might need to make adjustments if yours differ, and if this is the case you have to replace the database connector in the POM file as well. 
 Verify that the data on the connection pool class so it matches yours 
-(Localhost port, user name, password, you know the drill), then run the App and verify if it's working.
+(Localhost port, user name, password, as well as the connection string, you know the drill), then run the App and verify if it's working.
 
 -KNOWN ISSUES: For some reason the sorting function of the DataTable doesn't work on the links that let you update or delete.
 The search button has to be clicked twice to generate changes, this behavior is not intended.
